@@ -1,6 +1,8 @@
 class PhysicalServerController < ApplicationController
   include Mixins::GenericListMixin
   include Mixins::GenericShowMixin
+  include Mixins::GenericSessionMixin
+  include Mixins::MoreShowActions
 
   before_action :check_privileges
   before_action :session_data
@@ -40,5 +42,17 @@ class PhysicalServerController < ApplicationController
   helper_method :textual_group_list
 
   def button
+    if params[:pressed] == "#{table_name.singularize}_timeline"
+      @showtype = "timeline"
+      @record = find_record_with_rbac(ManageIQ::Providers::PhysicalInfraManager::PhysicalServer, params[:id])
+      @timeline = @timeline_filter = true
+      @lastaction = "show_timeline"
+      tl_build_timeline                       # Create the timeline report
+      drop_breadcrumb(:name => _("Timelines"), :url => show_link(@record, :refresh => "n", :display => "timeline"))
+      session[:tl_record_id] = @record.id
+      javascript_redirect polymorphic_path(@record, :display => 'timeline').sub! '.','/show/'
+      return
+    end
   end
+
 end

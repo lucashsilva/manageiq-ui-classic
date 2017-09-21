@@ -1320,6 +1320,8 @@ Rails.application.routes.draw do
         update
         update_del
         quick_search
+        tl_chooser
+        wait_for_task
       ) +
           adv_search_post +
           exp_post +
