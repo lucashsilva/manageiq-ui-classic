@@ -160,7 +160,7 @@ class ApplicationHelper::Toolbar::PhysicalServerCenter < ApplicationHelper::Tool
       t,
       :items => [
         button(
-          :ems_physical_infra_timeline,
+          :physical_server_timeline,
           'ff ff-timeline fa-lg',
           N_('Show Timelines for this Physical Server'),
           N_('Timelines'),
