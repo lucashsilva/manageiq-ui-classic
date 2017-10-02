@@ -47,12 +47,10 @@ class PhysicalServerController < ApplicationController
       @record = find_record_with_rbac(ManageIQ::Providers::PhysicalInfraManager::PhysicalServer, params[:id])
       @timeline = @timeline_filter = true
       @lastaction = "show_timeline"
-      tl_build_timeline                       # Create the timeline report
+      tl_build_timeline
       drop_breadcrumb(:name => _("Timelines"), :url => show_link(@record, :refresh => "n", :display => "timeline"))
       session[:tl_record_id] = @record.id
-      javascript_redirect polymorphic_path(@record, :display => 'timeline').sub! '.','/show/'
-      return
+      javascript_redirect(polymorphic_path(@record, :display => 'timeline').sub!('.', '/show/'))
     end
   end
-
 end
