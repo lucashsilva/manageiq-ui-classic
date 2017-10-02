@@ -53,5 +53,4 @@ class PhysicalServerController < ApplicationController
       javascript_redirect :action => 'show', :id => @record.id, :display => 'timeline'
     end
   end
-
 end
