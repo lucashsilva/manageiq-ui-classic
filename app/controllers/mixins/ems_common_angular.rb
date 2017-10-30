@@ -135,6 +135,8 @@ module Mixins
         [{:username => user, :password => password, :server => params[:default_hostname], :port => params[:default_api_port], :scheme => "http", :version => 4}]
       when 'ManageIQ::Providers::Vmware::InfraManager'
         [{:pass => password, :user => user, :ip => params[:default_hostname]}]
+      when 'ManageIQ::Providers::Lenovo::EmsPhysicalInfra'
+        [user, password, params[:default_hostname], params[:default_api_port], "token", false]
       end
     end
 
